@@ -58,9 +58,10 @@ let words = 0;
 const reader = fs.createReadStream(filePath);
 
 reader.on("data", (chunk) => {
-  lines += chunk.toString().match(/\n/g)?.length || 0;
+  const chunkStr = chunk.toString();
+  lines += chunkStr.match(/\n/g)?.length || 0;
   bytes += chunk.length;
-  words += chunk.toString().split(/\s+/).length;
+  words += chunkStr.split(/\s+/).length;
 });
 
 reader.on("error", (error) => {
